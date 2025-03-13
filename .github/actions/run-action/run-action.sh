@@ -27,7 +27,7 @@ case "$action" in
         if [ "$build_system" = 'meson' ]; then
           meson setup build -D qt5=true
         else
-          ./autogen.sh && ./configure --enable-qt5
+          ./autogen.sh && ./configure
         fi
         ;;
 
@@ -46,13 +46,13 @@ case "$action" in
         if [ "$build_system" = 'meson' ]; then
           meson setup build -D qt5=true -D gtk=false
         else
-          ./autogen.sh && ./configure --enable-qt5 --disable-gtk
+          ./autogen.sh && ./configure --enable-gtk3
         fi
         ;;
 
       macos*)
-        export PATH="/opt/homebrew/opt/qt@6/bin:$PATH"
-        export PKG_CONFIG_PATH="/opt/homebrew/opt/qt@6/libexec/lib/pkgconfig:$PKG_CONFIG_PATH"
+          export PATH="/usr/local/opt/qt@5/bin:$PATH"
+          export PKG_CONFIG_PATH="/usr/local/opt/qt@5/lib/pkgconfig:$PKG_CONFIG_PATH"
 
         if [ "$build_system" = 'meson' ]; then
           meson setup build -D gtk=false
