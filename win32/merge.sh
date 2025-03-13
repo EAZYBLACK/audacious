@@ -11,10 +11,10 @@ cd /C/aud-win32
 for i in `find -type f` ; do
     if test -f ${srcdir}/override/$i ; then
         cp ${srcdir}/override/$i $i
-    elif test -f /C/msys64/ucrt64/$i ; then
-        cp /C/msys64/ucrt64/$i $i
-    elif test -f /C/msys64/ucrt64/share/qt6/plugins/${i#"./bin/"} ; then
-        cp /C/msys64/ucrt64/share/qt6/plugins/${i#"./bin/"} $i
+    elif test -f /C/msys64/mingw32/$i ; then
+        cp /C/msys64/mingw32/$i $i
+    elif test -f /C/msys64/mingw32/share/qt5/plugins/${i#"./bin/"} ; then
+        cp /C/msys64/mingw32/share/qt5/plugins/${i#"./bin/"} $i
     elif test -f /C/libs/$i ; then
         cp /C/libs/$i $i
     elif test -f /C/aud/$i ; then
@@ -27,10 +27,15 @@ done
 for i in `find -name *.dll` ; do strip -s $i ; done
 for i in `find -name *.exe` ; do strip -s $i ; done
 
+<<<<<<< HEAD
 cd /C/msys64/ucrt64/share/qt6/translations
 mkdir -p /C/aud-win32/bin/share/qt6/translations
+=======
+cd /C/msys64/mingw32/share/qt5/translations
+mkdir -p /C/aud-win32/bin/share/qt5/translations
+>>>>>>> parent of 10485359a (Switch to x86-64 and Qt 6 for Windows builds)
 for i in `find . -name '*qt_*' ! -name '*qt_help_*' -o -name '*qtbase_*'` ; do
-    cp $i /C/aud-win32/bin/share/qt6/translations/$i
+    cp $i /C/aud-win32/bin/share/qt5/translations/$i
 done
 
 cd /C/libs
