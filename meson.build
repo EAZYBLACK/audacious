@@ -21,19 +21,17 @@ thread_dep = dependency('threads', required: true)
 
 
 if get_option('qt')
-  if get_option('qt5')
-    qt = import('qt5')
-    qt_req = '>= 5.2'
-    qt_dep = dependency('qt5', version: qt_req, required: true, modules: ['Core', 'Widgets', 'Gui', 'Svg'])
-  else
+  if get_option('qt6')
     if meson.version().version_compare('>= 0.57')
       qt = import('qt6')
     else
       error('Qt 6 is only supported since Meson 0.57.')
     endif
 
-    qt_req = '>= 6.0'
-    qt_dep = dependency('qt6', version: qt_req, required: true, modules: ['Core', 'Widgets', 'Gui', 'Svg'])
+  else
+    qt = import('qt5')
+    qt_req = '>= 5.2'
+    qt_dep = dependency('qt5', version: qt_req, required: true, modules: ['Core', 'Widgets', 'Gui'])
   endif
 endif
 
@@ -231,10 +229,17 @@ if meson.version().version_compare('>= 0.53')
 
   summary({
     'D-Bus support': get_option('dbus'),
+<<<<<<< HEAD
     'Qt 5 support': get_option('qt5'),
     'Qt 6 support': get_option('qt') and not get_option('qt5'),
     'GTK 2 support': get_option('gtk') and not get_option('gtk3'),
     'GTK 3 support': get_option('gtk3'),
+=======
+    'Qt 5 support': get_option('qt') and not get_option('qt6'),
+    'Qt 6 support': get_option('qt6'),
+    'GTK2 support': get_option('gtk') and not get_option('gtk3'),
+    'GTK3 support': get_option('gtk3'),
+>>>>>>> parent of 784d51858 (meson: Change default Qt version to 6)
     'Libarchive support': get_option('libarchive'),
     'Valgrind analysis support': get_option('valgrind'),
     'Build stamp': get_option('buildstamp'),

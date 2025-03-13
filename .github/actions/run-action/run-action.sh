@@ -23,9 +23,9 @@ fi
 case "$action" in
   configure)
     case "$os" in
-      ubuntu-22.04)
+      ubuntu-20.04 | windows*)
         if [ "$build_system" = 'meson' ]; then
-          meson setup build -D qt5=true
+          meson setup build
         else
           ./autogen.sh && ./configure
         fi
@@ -45,6 +45,9 @@ case "$action" in
 
         if [ "$build_system" = 'meson' ]; then
           meson setup build -D qt5=true -D gtk=false
+=======
+          meson setup build -D gtk3=true
+>>>>>>> parent of 784d51858 (meson: Change default Qt version to 6)
         else
           ./autogen.sh && ./configure --enable-gtk3
         fi
@@ -55,19 +58,11 @@ case "$action" in
           export PKG_CONFIG_PATH="/usr/local/opt/qt@5/lib/pkgconfig:$PKG_CONFIG_PATH"
 
         if [ "$build_system" = 'meson' ]; then
-          meson setup build -D gtk=false
+          meson setup build -D qt6=true -D gtk=false
         else
           export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
           export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
           ./autogen.sh && ./configure --disable-gtk
-        fi
-        ;;
-
-      windows*)
-        if [ "$build_system" = 'meson' ]; then
-          meson setup build
-        else
-          ./autogen.sh && ./configure
         fi
         ;;
 

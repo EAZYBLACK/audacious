@@ -3,7 +3,6 @@
 # --- Dependency configuration ---
 #
 
-
 os=$(tr '[:upper:]' '[:lower:]' <<< "$1")
 build_system=$(tr '[:upper:]' '[:lower:]' <<< "$2")
 
